@@ -35,6 +35,17 @@ class PhoneNumberKitTests: XCTestCase {
         XCTAssertNil(invalidCountry)
     }
 
+    func testValidMobileNumberFR() {
+        let testNumber = "0712345678"
+        do {
+            let phoneNumber = try phoneNumberKit.parse(testNumber, withRegion: "FR", ignoreType: false)
+            XCTAssertEqual(phoneNumber.countryCode, 33)
+            XCTAssertEqual(phoneNumber.type, PhoneNumberType.mobile)
+        }
+        catch {
+            XCTFail()
+        }
+    }
     
     // Invalid american number, GitHub issue #8 by j-pk
     func testInvalidNumberE() {
